@@ -1,12 +1,14 @@
 /* eslint-disable @next/next/link-passhref */
 import Link from 'next/link';
 import Image from 'next/image'
-//top nav
+import { useContext } from 'react';
+import { UserContext } from '../lib/context';
 
+//top nav
 export default function Navbar() {
-  // const { user, username } = {};
-  const user = true;
-  const username = true;
+  
+  const { user, username } = useContext(UserContext) 
+
   return (
     <nav className='navbar'>
       <ul>
@@ -19,6 +21,7 @@ export default function Navbar() {
         {/* user is signed in and has a username */}
         {username && (
           <>
+          
           <li>
             <Link href="/admin">
               <button>Write Posts</button>
