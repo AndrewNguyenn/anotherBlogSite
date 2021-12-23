@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/link-passhref */
 import Link from 'next/link';
-
+import Image from 'next/image'
 //top nav
 
 export default function Navbar() {
-  const { user, username } = {};
-
+  // const { user, username } = {};
+  const user = true;
+  const username = true;
   return (
     <nav className='navbar'>
       <ul>
@@ -25,7 +26,7 @@ export default function Navbar() {
           </li>
           <li>
             <Link href={`/${username}`}>
-              <img src={user?.photoURL}/>
+              <img src={user?.photoURL} />
             </Link>
           </li>
           </>
@@ -38,7 +39,7 @@ export default function Navbar() {
               <button>Log in</button>
             </Link>
           </li>
-          
+
         )}
       </ul>
     </nav>
