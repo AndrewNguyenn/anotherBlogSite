@@ -38,13 +38,7 @@ function  SignInButton() {
 }
 // sign out
 function SignOutButton() {
-  try {
-    return (
-      <button onClick={() => signOut}>Sign Out</button>
-    )
-  } catch (error) {
-    console.log(error)
-  }
+  return <button onClick={() => signOut(auth)}>Sign Out</button>;  
 }
 
 function UsernameForm() {
@@ -59,7 +53,7 @@ function UsernameForm() {
     checkUsername(formValue)
   }, [formValue])
 
-  const onSubmit = async(e) => {
+  const onSubmit = async(e: Event) => {
     try {
       e.preventDefault()
 
@@ -71,7 +65,6 @@ function UsernameForm() {
     const batch = writeBatch(getFirestore());
     batch.set(userDoc, { username: formValue, photoURL: user.photoURL, displayName: user.displayName });
     batch.set(usernameDoc, { uid: user.uid });
-
     await batch.commit();
   } catch (error) {
       console.log(error)
@@ -79,7 +72,7 @@ function UsernameForm() {
   }
 
 
-  const onChange = (e) => {
+  const onChange = (e: Event) => {
     const val = e.target.value.toLowerCase();
     const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
 
@@ -116,6 +109,7 @@ function UsernameForm() {
         <h3>Choose Username</h3>
         <form onSubmit={onSubmit}>
           <input name="username" placeholder='username' value={formValue} onChange={onChange} />
+          <UsernameMessage username={formValue} isValid={isValid} loading={loading} />
           <button type='submit' className='btn-green' disabled={!isValid}>
             Yup
           </button>
@@ -131,4 +125,15 @@ function UsernameForm() {
       </section>
     )
   )
+}
+function UsernameMessage({ username, isValid, loading }) {
+  if (loading) {
+    return <p>Checking...</p>;
+  } else if (isValid) {
+    return <p className="text-success">{username} is available!</p>;
+  } else if (username && !isValid) {
+    return <p className="text-danger">That username is taken!</p>;
+  } else {
+    return <p></p>;
+  }
 }
