@@ -29,7 +29,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "lib/firebase.ts"  ],
+, "lib/firebase.ts", "pages/admin/index.tsx"  ],
   "exclude": [
     "node_modules"
   ],

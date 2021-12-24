@@ -71,7 +71,7 @@ export default function Post({ props }) {
         <AuthCheck
           fallback={
             <Link href="/enter">
-              <button>� Sign Up</button>
+              <button>🤍 Sign Up</button>
             </Link>
           }
         >

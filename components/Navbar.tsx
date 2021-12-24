@@ -21,7 +21,6 @@ export default function Navbar() {
         {/* user is signed in and has a username */}
         {username && (
           <>
-          
           <li>
             <Link href="/admin">
               <button>Write Posts</button>

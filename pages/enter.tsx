@@ -53,9 +53,9 @@ function UsernameForm() {
     checkUsername(formValue)
   }, [formValue])
 
-  const onSubmit = async(e: Event) => {
+  const onSubmit = async(e: any) => {
     try {
-      e.preventDefault()
+    e.preventDefault()
 
     //create refs for both documents
     const userDoc = doc(getFirestore(), 'users', user.uid);
@@ -72,7 +72,7 @@ function UsernameForm() {
   }
 
 
-  const onChange = (e: Event) => {
+  const onChange = (e: any) => {
     const val = e.target.value.toLowerCase();
     const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
 
