@@ -13,7 +13,7 @@ import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
-export default function AdminPostEdit(props) {
+export default function AdminPostEdit(props: any) {
   return (
     <AuthCheck>
       <PostManager />
@@ -28,7 +28,7 @@ function PostManager() {
   const { slug } = router.query;
 
   // const postRef = firestore.collection('users').doc(auth.currentUser.uid).collection('posts').doc(slug);
-  const postRef: any = doc(getFirestore(), 'users', auth.currentUser.uid, 'posts', slug)
+  const postRef: any = doc(getFirestore(), 'users', auth.currentUser.uid, 'posts')
   const [post] = useDocumentDataOnce(postRef);
 
   return (
