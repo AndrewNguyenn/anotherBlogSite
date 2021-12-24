@@ -7,9 +7,11 @@ import { UserContext } from '@lib/context';
 import { firestore, getUserWithUsername, postToJSON } from '@lib/firebase';
 import { doc, getDocs, getDoc, collectionGroup, query, limit, getFirestore } from 'firebase/firestore';
 
+
 import Link from 'next/link';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { useContext } from 'react';
+
 
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
@@ -19,41 +21,53 @@ export async function getStaticProps({ params }) {
   let path;
 
   if (userDoc) {
+    // const postRef = userDoc.ref.collection('posts').doc(slug);
     const postRef = doc(getFirestore(), userDoc.ref.path, 'posts', slug);
-    post = postToJSON(await getDoc(postRef));
+
+    // post = postToJSON(await postRef.get());
+    post = postToJSON(await getDoc(postRef) );
+
     path = postRef.path;
   }
+
   return {
     props: { post, path },
-    revalidate: 5000,
+    revalidate: 100,
   };
-};
+}
 
 export async function getStaticPaths() {
-  //! improve this with admin SDK to select empty docs
+  // Improve my using Admin SDK to select empty docs
   const q = query(
     collectionGroup(getFirestore(), 'posts'),
     limit(20)
   )
   const snapshot = await getDocs(q);
-  const paths = snapshot.docs.map((doc => {
+
+  const paths = snapshot.docs.map((doc) => {
     const { slug, username } = doc.data();
     return {
       params: { username, slug },
     };
-  }))
+  });
+
   return {
+    // must be in this format:
+    // paths: [
+    //   { params: { username, slug }}
+    // ],
     paths,
-    fallback: 'blocking'
+    fallback: 'blocking',
   };
-};
+}
 
-export default function Post({ props }) {
+export default function Post(props) {
   const postRef = doc(getFirestore(), props.path);
-  const [ realtimePost ] = useDocumentData(postRef);
-  const post = realtimePost || props.post;
-  const { user: currentUser } = useContext(UserContext);
+  const [realtimePost] = useDocumentData(postRef);
 
+  const post = realtimePost || props.post;
+
+  const { user: currentUser } = useContext(UserContext);
 
   return (
     <main className={styles.container}>
@@ -65,13 +79,13 @@ export default function Post({ props }) {
 
       <aside className="card">
         <p>
-          <strong>{post.heartCount || 0} 🤍</strong>
+          <strong>{post.heartCount || 0} ❤️</strong>
         </p>
 
         <AuthCheck
           fallback={
             <Link href="/enter">
-              <button>🤍 Sign Up</button>
+              <button>❤️ Sign Up</button>
             </Link>
           }
         >
@@ -85,5 +99,5 @@ export default function Post({ props }) {
         )}
       </aside>
     </main>
-  )
+  );
 }
