@@ -80,7 +80,7 @@ export default function Home(props) {
         <p>Sign up for anaccount, ✍️ write posts, then ❤️ heart content created by other users. All public content is server-rendered and search-engine optimized.</p>
       </div>
      
-      <PostFeed posts={posts} admin={undefined} />
+      <PostFeed posts={posts} />
 
       {!loading && !postsEnd && <button onClick={getMorePosts}>Load more</button>}
 
