@@ -34,7 +34,7 @@ import { useContext } from 'react';
 //     props: { post, path },
 //     revalidate: 100,
 //   };
-}
+// }
 
 // export async function getStaticPaths() {
 //   // Improve my using Admin SDK to select empty docs
