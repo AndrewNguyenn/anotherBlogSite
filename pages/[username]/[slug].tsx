@@ -1,4 +1,4 @@
-mport styles from '@styles/Post.module.css';
+import styles from '@styles/Post.module.css';
 import PostContent from '@components/PostContent';
 import HeartButton from '@components/HeartButton';
 import AuthCheck from '@components/AuthCheck';
