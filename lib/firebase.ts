@@ -9,8 +9,8 @@ const firebaseConfig = {
   projectId: "blog-868f9",
   storageBucket: "blog-868f9.appspot.com",
   messagingSenderId: "687306599383",
-  appId: "1:687306599383:web:59f41564b44a16c7b9f992",
-  measurementId: "G-PNZBEQ09XB"
+  appId: "1:687306599383:web:863e8e899e571774b9f992",
+  measurementId: "G-DLPBXLH39H"
 };
 
 function createFirebaseApp(config : object) {
