@@ -1,4 +1,4 @@
-import styles from '@styles/Post.module.css';
+mport styles from '@styles/Post.module.css';
 import PostContent from '@components/PostContent';
 import HeartButton from '@components/HeartButton';
 import AuthCheck from '@components/AuthCheck';
@@ -17,8 +17,8 @@ export async function getStaticProps({ params }) {
   const { username, slug } = params;
   const userDoc = await getUserWithUsername(username);
 
-  let post = null;
-  let path = null;
+  let post;
+  let path;
 
   if (userDoc) {
     // const postRef = userDoc.ref.collection('posts').doc(slug);
@@ -32,7 +32,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: { post, path },
-    revalidate: 5000,
+    revalidate: 100,
   };
 }
 
@@ -79,13 +79,13 @@ export default function Post(props) {
 
       <aside className="card">
         <p>
-          <strong>{post.heartCount || 0} ❤️</strong>
+          <strong>{post.heartCount || 0} 🤍</strong>
         </p>
 
         <AuthCheck
           fallback={
             <Link href="/enter">
-              <button>❤️ Sign Up</button>
+              <button>💗 Sign Up</button>
             </Link>
           }
         >
